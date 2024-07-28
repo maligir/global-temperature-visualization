@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Temperature Visualization</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="title">Global Temperature Change Visualization</div>
+        <div id="scene-container">
+            <div id="scene1" class="scene">
+                <!-- Scene 1 content will be dynamically inserted here -->
+            </div>
+            <div id="scene2" class="scene">
+                <!-- Scene 2 content will be dynamically inserted here -->
+            </div>
+            <div id="scene3" class="scene">
+                <!-- Scene 3 content will be dynamically inserted here -->
+            </div>
+        </div>
+        <div id="controls">
+            <button onclick="showScene(1)">Scene 1</button>
+            <button onclick="showScene(2)">Scene 2</button>
+            <button onclick="showScene(3)">Scene 3</button>
+        </div>
+        
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

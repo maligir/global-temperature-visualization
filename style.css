@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+#title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.scene {
+    display: none;
+}
+
+#controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#controls button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+}
+/* Tooltip styling */
+.tooltip {
+    position: absolute;
+    text-align: left;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Annotation styling */
+.annotation {
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.annotation:hover {
+    fill: darkred; /* Change color on hover for interactivity cue */
+}
