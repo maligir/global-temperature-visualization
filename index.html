@@ -22,10 +22,21 @@
             </div>
         </div>
         <div id="controls">
-            <button onclick="showScene(1)">Scene 1</button>
-            <button onclick="showScene(2)">Scene 2</button>
-            <button onclick="showScene(3)">Scene 3</button>
+            <button onclick="showScene(1)">Scene 1: 1900-1950</button>
+            <button onclick="showScene(2)">Scene 2: 1950-2000</button>
+            <button onclick="showScene(3)">Scene 3: 2000-Present</button>
         </div>
+        <div id="controls">
+            <button onclick="previousScene()">&#9664; Previous</button>
+            <span id="subtitle">Scene 1: 1900-1950</span>
+            <button onclick="nextScene()">Next &#9654;</button>
+        </div>
+        <div id="scenes">
+            <div id="scene1" class="scene"></div>
+            <div id="scene2" class="scene"></div>
+            <div id="scene3" class="scene"></div>
+        </div>
+        
         
     </div>
     <script src="script.js"></script>

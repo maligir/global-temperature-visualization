@@ -94,7 +94,7 @@ function createScene1(data) {
         .y(d => y(d.smoothedTemperature));
     
     svg.append("path")
-        .datum(data)
+    .datum(data.filter(d => d.dt.getFullYear() >= 1900 && d.dt.getFullYear() <= 1949))
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
@@ -151,7 +151,7 @@ function createScene1(data) {
         .style("opacity", 0);
 
     // Tooltip interaction for 5-year averages
-    const years = d3.range(1900, 1955, 5);
+    const years = d3.range(1900, 1950, 5);
     years.forEach(year => {
         const yearData = data.filter(d => d.dt.getFullYear() >= year && d.dt.getFullYear() < year + 5);
         if (yearData.length > 0) {
@@ -215,7 +215,7 @@ function createScene2(data) {
         .y(d => y(d.smoothedTemperature));
     
     svg.append("path")
-        .datum(data)
+    .datum(data.filter(d => d.dt.getFullYear() >= 1950 && d.dt.getFullYear() <= 1999))
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
@@ -272,7 +272,7 @@ function createScene2(data) {
         .style("opacity", 0);
 
     // Tooltip interaction for 5-year averages
-    const years = d3.range(1950, 2005, 5);
+    const years = d3.range(1951, 2000, 5);
     years.forEach(year => {
         const yearData = data.filter(d => d.dt.getFullYear() >= year && d.dt.getFullYear() < year + 5);
         if (yearData.length > 0) {
@@ -315,11 +315,11 @@ function createScene3(data) {
 
     // X axis: time scale
     const x = d3.scaleTime()
-        .domain(d3.extent(data, d => d.dt))
+        .domain([new Date(2001, 0, 1), new Date(2014, 11, 31)])
         .range([0, width]);
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x).ticks(d3.timeYear.every(5)));
 
     // Y axis: temperature anomaly scale
     const y = d3.scaleLinear()
@@ -336,7 +336,7 @@ function createScene3(data) {
         .y(d => y(d.smoothedTemperature));
     
     svg.append("path")
-        .datum(data)
+        .datum(data.filter(d => d.dt.getFullYear() >= 2000 && d.dt.getFullYear() <= 2014))
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
@@ -347,7 +347,6 @@ function createScene3(data) {
     // Annotations for Scene 3
     const annotations = [
         { date: new Date("2015-01-01"), text: "Paris Agreement", description: "Global agreement to combat climate change and accelerate actions towards a sustainable low carbon future.", yOffset: -30 },
-        { date: new Date("2020-01-01"), text: "COVID-19 Pandemic", description: "Temporary reduction in CO2 emissions due to global lockdowns and reduced industrial activity.", yOffset: -30 }
     ];
 
     // Tooltip setup for annotations
@@ -359,6 +358,7 @@ function createScene3(data) {
     annotations.forEach(annotation => {
         const xPos = x(annotation.date);
         const yPos = y(data.find(d => d.dt.getFullYear() === annotation.date.getFullYear()).smoothedTemperature);
+
         svg.append("text")
             .attr("x", xPos)
             .attr("y", yPos + annotation.yOffset)
@@ -375,7 +375,7 @@ function createScene3(data) {
             .on("mouseout", function() {
                 annotationTooltip.transition().duration(500).style("opacity", 0);
             });
-
+            console.log("Smoothed line path drawn for Scene 4");
         // Draw a line for better visibility
         svg.append("line")
             .attr("x1", xPos)
@@ -394,7 +394,7 @@ function createScene3(data) {
         .style("opacity", 0);
 
     // Tooltip interaction for 5-year averages
-    const years = d3.range(2000, new Date().getFullYear() + 1, 5);
+    const years = d3.range(2001, new Date().getFullYear() + 1, 5);
     years.forEach(year => {
         const yearData = data.filter(d => d.dt.getFullYear() >= year && d.dt.getFullYear() < year + 5);
         if (yearData.length > 0) {
@@ -420,11 +420,42 @@ function createScene3(data) {
     console.log("Tooltip setup complete for Scene 3");
 }
 
-// Function to display a specific scene
+let currentScene = 1;
+
 function showScene(sceneNumber) {
     d3.selectAll('.scene').style('display', 'none');
     d3.select(`#scene${sceneNumber}`).style('display', 'block');
+    updateSubtitle(sceneNumber);
+    currentScene = sceneNumber;
 }
 
-// Initialize the first scene
+function previousScene() {
+    if (currentScene > 1) {
+        showScene(currentScene - 1);
+    }
+}
+
+function nextScene() {
+    if (currentScene < 3) {
+        showScene(currentScene + 1);
+    }
+}
+
+function updateSubtitle(sceneNumber) {
+    let subtitleText = "";
+    switch (sceneNumber) {
+        case 1:
+            subtitleText = "Scene 1: 1900-1950";
+            break;
+        case 2:
+            subtitleText = "Scene 2: 1950-2000";
+            break;
+        case 3:
+            subtitleText = "Scene 3: 2000-Present";
+            break;
+    }
+    d3.select("#subtitle").text(subtitleText);
+}
+
+// Initialize the first scene on page load
 showScene(1);
