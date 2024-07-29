@@ -3,42 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Temperature Visualization</title>
+    <title>Global Temperature Trends</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <div id="container">
-        <div id="title">Global Temperature Change Visualization</div>
-        <div id="scene-container">
-            <div id="scene1" class="scene">
-                <!-- Scene 1 content will be dynamically inserted here -->
-            </div>
-            <div id="scene2" class="scene">
-                <!-- Scene 2 content will be dynamically inserted here -->
-            </div>
-            <div id="scene3" class="scene">
-                <!-- Scene 3 content will be dynamically inserted here -->
-            </div>
+    <header>
+        <h1>Global Temperature Trends</h1>
+        <p id="currentRange">Viewing Years: 1750 - 1800</p>
+    </header>
+
+    <main>
+        <div class="controls">
+            <label for="startYear">Start Year:</label>
+            <input type="number" id="startYear" min="1750" max="2015" value="1750">
+            <label for="endYear">End Year:</label>
+            <input type="number" id="endYear" min="1750" max="2015" value="1800">
+            <button id="updateButton">Update</button>
         </div>
-        <div id="controls">
-            <button onclick="showScene(1)">Scene 1: 1900-1950</button>
-            <button onclick="showScene(2)">Scene 2: 1950-2000</button>
-            <button onclick="showScene(3)">Scene 3: 2000-Present</button>
+        <div class="navigation">
+            <button id="prevScene">Previous</button>
+            <button class="decadeButton" data-decade="1750">1750-1800</button>
+            <button class="decadeButton" data-decade="1800">1800-1850</button>
+            <button class="decadeButton" data-decade="1850">1850-1900</button>
+            <button class="decadeButton" data-decade="1900">1900-1950</button>
+            <button class="decadeButton" data-decade="1950">1950-2000</button>
+            <button id="nextScene">Next</button>
         </div>
-        <div id="controls">
-            <button onclick="previousScene()">&#9664; Previous</button>
-            <span id="subtitle">Scene 1: 1900-1950</span>
-            <button onclick="nextScene()">Next &#9654;</button>
-        </div>
-        <div id="scenes">
-            <div id="scene1" class="scene"></div>
-            <div id="scene2" class="scene"></div>
-            <div id="scene3" class="scene"></div>
-        </div>
-        
-        
-    </div>
+        <div id="chart"></div>
+    </main>
+
+    <footer>
+        <p>Data source: GlobalTemperatures.csv</p>
+    </footer>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

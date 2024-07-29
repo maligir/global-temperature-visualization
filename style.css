@@ -1,94 +1,93 @@
+/* style.css */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-#container {
-    width: 80%;
-    max-width: 1200px;
-    margin: 20px auto;
-}
-
-#title {
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 2em;
 }
 
-.scene {
-    display: none;
+h1 {
+    margin: 0;
 }
 
-#controls {
+#currentRange {
+    font-size: 1.2em;
+    margin-top: 0.5em;
+}
+
+main {
+    padding: 1em;
+}
+
+.controls, .navigation {
+    margin-bottom: 1em;
     text-align: center;
-    margin-top: 20px;
 }
 
-#controls button {
-    margin: 5px;
-    padding: 10px 20px;
-    font-size: 1em;
+.controls label, .controls input {
+    margin: 0 0.5em;
 }
-/* Tooltip styling */
+
+#chart {
+    width: 100%;
+    height: 500px;
+    position: relative;
+}
+
 .tooltip {
     position: absolute;
-    text-align: left;
+    text-align: center;
     width: auto;
-    height: auto;
     padding: 5px;
     font: 12px sans-serif;
     background: lightsteelblue;
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
-    opacity: 0;
 }
 
-/* Annotation styling */
-.annotation {
-    cursor: pointer;
-    font-weight: bold;
-    text-decoration: underline;
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+    stroke-linecap: round;
 }
 
-.annotation:hover {
-    fill: darkred; /* Change color on hover for interactivity cue */
+.dot {
+    fill: steelblue;
+    stroke: #fff;
+    stroke-width: 1.5px;
 }
 
-.scene {
-    display: none;
+.axis path, .axis line {
+    fill: none;
+    stroke: #333;
+    shape-rendering: crispEdges;
 }
 
-#scenes {
-    width: 800px;
-    margin: 20px auto;
+.axis text {
+    font-size: 12px;
+    fill: #333;
 }
 
-button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
+.annotation rect {
+    fill: rgba(255, 255, 255, 0.8);
+    stroke: none;
+    overflow: hidden; /* Ensure content fits within the box */
 }
 
-#controls {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#subtitle {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 15px;
-}
-
-svg {
-    overflow: visible; /* Ensures elements are not clipped */
-    padding: 20px; /* Adds padding to avoid clipping */
+.annotation text {
+    font-size: 12px;
+    fill: #333;
+    text-anchor: middle;
+    pointer-events: all;
 }
